@@ -1,7 +1,7 @@
 package com.iprwc.webshop.repositories;
 
 import com.iprwc.webshop.model.Category;
-import com.iprwc.webshop.model.Product;
+import com.iprwc.webshop.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Category c SET c.title = :title, c.description = :description, c.products = :products WHERE c.id = :id")
-    void update(String title, String description, List<Product> products, int id);
+    @Query(value = "UPDATE Category c SET c.title = :title, c.description = :description, c.cars = :cars WHERE c.id = :id")
+    void update(String title, String description, List<Car> cars, int id);
 }

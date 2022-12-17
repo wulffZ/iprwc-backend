@@ -19,7 +19,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    private List<Car> cars;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -36,12 +36,12 @@ public class Category {
         this.description = email;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Car> getProducts() {
+        return cars;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(List<Car> cars) {
+        this.cars = cars;
     }
 
     public int getId() {
