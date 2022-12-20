@@ -24,6 +24,15 @@ public class RoleFilter extends OncePerRequestFilter {
         this.userDAO = userDAO;
         this.routePermissions = new LinkedHashMap<String, String[]>();
 
+        this.routePermissions.put("GET /api/car",
+                new String[]{
+                        String.valueOf(Permission.AUTHENTICATE)});
+        this.routePermissions.put("POST /api/car",
+                new String[]{
+                        String.valueOf(Permission.AUTHENTICATE)});
+        this.routePermissions.put("GET /api/car/*",
+                new String[]{
+                        String.valueOf(Permission.AUTHENTICATE)});
         this.routePermissions.put("GET /api/user/info",
                 new String[]{
                         String.valueOf(Permission.AUTHENTICATE)});
@@ -57,7 +66,7 @@ public class RoleFilter extends OncePerRequestFilter {
 
         List<Integer> pathVariables = new ArrayList<>();
         for(String value: key.split("/")) {
-            try{
+            try {
                 pathVariables.add(Integer.parseInt(value));
             } catch (NumberFormatException e) {
             }

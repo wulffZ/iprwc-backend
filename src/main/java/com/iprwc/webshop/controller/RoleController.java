@@ -29,6 +29,7 @@ public class RoleController {
     @ResponseBody
     public ResponseEntity index() {
         ArrayList<Role> list = roleDAO.index();
+
         if(list.size() > 0){
            return new ApiResponse(HttpStatus.OK, list).getResponse();
         }
@@ -51,6 +52,7 @@ public class RoleController {
     public ResponseEntity store(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO) {
         Role role = roleStoreDTO.toValidRole();
         boolean response = roleDAO.store(role);
+
         if(response){
             return new ApiResponse(HttpStatus.CREATED, role).getResponse();
         }
@@ -60,9 +62,10 @@ public class RoleController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO, @PathVariable int id){
+    public ResponseEntity update(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO, @PathVariable int id) {
         Role role = roleStoreDTO.toValidRole();
         boolean response = roleDAO.update(role, id);
+
         if(response) {
             return new ApiResponse(HttpStatus.CREATED, role).getResponse();
         }
@@ -74,6 +77,7 @@ public class RoleController {
     @ResponseBody
     public ResponseEntity delete(@PathVariable int id) {
         boolean response = roleDAO.delete(id);
+
         if(response){
             return new ApiResponse(HttpStatus.NO_CONTENT, new Message("Deleted role with id " + id)).getResponse();
         }

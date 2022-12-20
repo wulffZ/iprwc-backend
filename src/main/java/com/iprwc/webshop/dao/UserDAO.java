@@ -17,16 +17,16 @@ public class UserDAO {
     }
 
     /**
-     * Returns an employee object with a specific id.
-     * If there is no employee with the specified id, returns null
+     * Returns a user object with a specific id.
+     * If there is no user with the specified id, returns null
      *
-     * @param id the id of the employee
-     * @return employee
+     * @param id the id of the user
+     * @return user
      */
     public User show(Integer id) {
-        Optional<User> employee = this.userRepository.findById(id);
+        Optional<User> user = this.userRepository.findById(id);
 
-        return employee.orElse(null);
+        return user.orElse(null);
     }
 
     public User getUserDetails(){

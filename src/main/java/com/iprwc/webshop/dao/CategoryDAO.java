@@ -1,5 +1,6 @@
 package com.iprwc.webshop.dao;
 
+import com.iprwc.webshop.model.Car;
 import com.iprwc.webshop.model.Category;
 import com.iprwc.webshop.model.User;
 import com.iprwc.webshop.repositories.CategoryRepository;
@@ -7,6 +8,7 @@ import com.iprwc.webshop.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
@@ -16,6 +18,10 @@ public class CategoryDAO {
 
     public CategoryDAO(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+    }
+
+    public ArrayList<Category> index(){
+        return (ArrayList<Category>) categoryRepository.findAll();
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.iprwc.webshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -19,6 +20,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Car> cars;
 
     @ManyToMany(fetch = FetchType.EAGER)

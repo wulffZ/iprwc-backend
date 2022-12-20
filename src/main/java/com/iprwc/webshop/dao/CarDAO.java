@@ -1,9 +1,11 @@
 package com.iprwc.webshop.dao;
 
 import com.iprwc.webshop.model.Car;
+import com.iprwc.webshop.model.Role;
 import com.iprwc.webshop.repositories.CarRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
@@ -15,6 +17,10 @@ public class CarDAO {
         this.carRepository = carRepository;
     }
 
+    public ArrayList<Car> index(){
+        return (ArrayList<Car>) carRepository.findAll();
+    }
+
     /**
      * Returns a product object with a specific id.
      * If there is no product with the specified id, returns null
@@ -23,9 +29,9 @@ public class CarDAO {
      * @return product
      */
     public Car show(Integer id) {
-        Optional<Car> product = this.carRepository.findById(id);
+        Optional<Car> car = this.carRepository.findById(id);
 
-        return product.orElse(null);
+        return car.orElse(null);
     }
 
     public Car store(Car car){

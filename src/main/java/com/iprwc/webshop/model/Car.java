@@ -1,5 +1,6 @@
 package com.iprwc.webshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,9 +19,10 @@ public class Car {
     private String title;
     @NotBlank
     private String description;
+    @JsonIgnore
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
     @NotBlank
     private String manufacturer;
@@ -32,7 +34,10 @@ public class Car {
     private String year;
     @NotBlank
     private String km;
+
     @NotBlank
+    @Lob
+    @Column(name="thumbnail_uri", length=512)
     private String thumbnail_uri;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -41,6 +46,8 @@ public class Car {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
+
+    public Car() {}
 
     public Car(String name, String email, String password, Category category) {
         this.title = name;
