@@ -17,7 +17,7 @@ public class CarDAO {
         this.carRepository = carRepository;
     }
 
-    public ArrayList<Car> index(){
+    public ArrayList<Car> index() {
         return (ArrayList<Car>) carRepository.findAll();
     }
 
@@ -34,12 +34,27 @@ public class CarDAO {
         return car.orElse(null);
     }
 
-    public Car store(Car car){
+    public Car store(Car car) {
         return carRepository.save(car);
     }
 
-    public Car update(Car car) {
-        this.carRepository.update(car.getTitle(),  car.getDescription(), car.getCategory(), car.getManufacturer(), car.getEngine_displacement(), car.getCylinders(), car.getYear(), car.getKm(), car.getThumbnailUri(), car.getId());
-        return car;
+    public boolean update(Car car) {
+        try {
+            carRepository.update(car.getTitle(), car.getDescription(), car.getCategory(), car.getManufacturer(), car.getEngine_displacement(), car.getCylinders(), car.getYear(), car.getKm(), car.getThumbnailUri(), car.getId());
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean delete(Car car) {
+        try {
+            carRepository.delete(car);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

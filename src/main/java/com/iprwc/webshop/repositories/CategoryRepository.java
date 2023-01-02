@@ -13,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Category c SET c.title = :title, c.description = :description, c.cars = :cars WHERE c.id = :id")
-    void update(String title, String description, List<Car> cars, int id);
+    @Query(value = "UPDATE Category c SET c.title = :title, c.description = :description WHERE c.id = :id")
+    void update(String title, String description, int id);
 }

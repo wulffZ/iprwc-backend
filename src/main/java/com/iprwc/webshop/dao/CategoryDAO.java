@@ -41,8 +41,23 @@ public class CategoryDAO {
         return categoryRepository.save(category);
     }
 
-    public Category update(Category category) {
-        this.categoryRepository.update(category.getTitle(),  category.getDescription(), category.getProducts(), category.getId());
-        return category;
+    public boolean update(Category category) {
+        try {
+            this.categoryRepository.update(category.getTitle(),  category.getDescription(), category.getId());
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean delete(Category category) {
+        try {
+            categoryRepository.delete(category);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.iprwc.webshop.Message;
 import com.iprwc.webshop.dao.CarDAO;
 import com.iprwc.webshop.dao.RoleDAO;
 import com.iprwc.webshop.dto.CarStoreDTO;
+import com.iprwc.webshop.dto.CarUpdateDTO;
 import com.iprwc.webshop.dto.CategoryStoreDTO;
 import com.iprwc.webshop.dto.RoleStoreDTO;
 import com.iprwc.webshop.model.ApiResponse;
@@ -64,41 +65,31 @@ public class CarController {
         return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("Something went wrong with creating the car")).getResponse();
     }
 
-//    @RequestMapping(value = "", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponseEntity store(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO) {
-//        Role role = roleStoreDTO.toValidRole();
-//        boolean response = roleDAO.store(role);
-//
-//        if(response){
-//            return new ApiResponse(HttpStatus.CREATED, role).getResponse();
-//        }
-//
-//        return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("Something went wrong with creating the role")).getResponse();
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public ResponseEntity update(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO, @PathVariable int id) {
-//        Role role = roleStoreDTO.toValidRole();
-//        boolean response = roleDAO.update(role, id);
-//
-//        if(response) {
-//            return new ApiResponse(HttpStatus.CREATED, role).getResponse();
-//        }
-//
-//        return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("The role you created is invalid")).getResponse();
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    @ResponseBody
-//    public ResponseEntity delete(@PathVariable int id) {
-//        boolean response = roleDAO.delete(id);
-//
-//        if(response){
-//            return new ApiResponse(HttpStatus.NO_CONTENT, new Message("Deleted role with id " + id)).getResponse();
-//        }
-//
-//        return new ApiResponse(HttpStatus.NOT_FOUND, new Message("Could not find role with id " + id)).getResponse();
-//    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity update(@Valid @NotNull @RequestBody CarUpdateDTO carUpdateDTO, @PathVariable int id) {
+        Car carToUpdate = carDAO.show(id);
+
+        Car updatedCar = carUpdateDTO.toCar(carToUpdate);
+        boolean result = carDAO.update(updatedCar);
+
+        if(result){
+            return new ApiResponse(HttpStatus.CREATED, updatedCar).getResponse();
+        }
+
+        return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("Something went wrong with updating the car")).getResponse();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity delete(@PathVariable int id) {
+        Car car = carDAO.show(id);
+
+        boolean response = carDAO.delete(car);
+        if(response){
+            return new ApiResponse(HttpStatus.NO_CONTENT, new Message("Deleted car with id " + id)).getResponse();
+        }
+
+        return new ApiResponse(HttpStatus.NOT_FOUND, new Message("Could not find car with id " + id)).getResponse();
+    }
 }

@@ -3,7 +3,9 @@ package com.iprwc.webshop.controller;
 import com.iprwc.webshop.Message;
 import com.iprwc.webshop.dao.CarDAO;
 import com.iprwc.webshop.dao.CategoryDAO;
+import com.iprwc.webshop.dto.CarUpdateDTO;
 import com.iprwc.webshop.dto.CategoryStoreDTO;
+import com.iprwc.webshop.dto.CategoryUpdateDTO;
 import com.iprwc.webshop.model.ApiResponse;
 import com.iprwc.webshop.model.Car;
 import com.iprwc.webshop.model.Category;
@@ -57,29 +59,32 @@ public class CategoryController {
 
         return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("Something went wrong with creating the role")).getResponse();
     }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public ResponseEntity update(@Valid @NotNull @RequestBody RoleStoreDTO roleStoreDTO, @PathVariable int id) {
-//        Role role = roleStoreDTO.toValidRole();
-//        boolean response = roleDAO.update(role, id);
-//
-//        if(response) {
-//            return new ApiResponse(HttpStatus.CREATED, role).getResponse();
-//        }
-//
-//        return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("The role you created is invalid")).getResponse();
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    @ResponseBody
-//    public ResponseEntity delete(@PathVariable int id) {
-//        boolean response = roleDAO.delete(id);
-//
-//        if(response){
-//            return new ApiResponse(HttpStatus.NO_CONTENT, new Message("Deleted role with id " + id)).getResponse();
-//        }
-//
-//        return new ApiResponse(HttpStatus.NOT_FOUND, new Message("Could not find role with id " + id)).getResponse();
-//    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity update(@Valid @NotNull @RequestBody CategoryUpdateDTO categoryUpdateDTO, @PathVariable int id) {
+        Category categoryToUpdate = categoryDAO.show(id);
+
+        Category updatedCategory = categoryUpdateDTO.toCategory(categoryToUpdate);
+        boolean result = categoryDAO.update(updatedCategory);
+
+        if (result) {
+            return new ApiResponse(HttpStatus.CREATED, updatedCategory).getResponse();
+        }
+
+        return new ApiResponse(HttpStatus.BAD_REQUEST, new Message("Something went wrong with updating the car")).getResponse();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity delete(@PathVariable int id) {
+        Category category = categoryDAO.show(id);
+
+        boolean response = categoryDAO.delete(category);
+        if(response){
+            return new ApiResponse(HttpStatus.NO_CONTENT, new Message("Deleted category with id " + id)).getResponse();
+        }
+
+        return new ApiResponse(HttpStatus.NOT_FOUND, new Message("Could not find category with id " + id)).getResponse();
+    }
 }

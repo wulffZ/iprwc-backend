@@ -1,12 +1,10 @@
 package com.iprwc.webshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 @Table(name = "car")
@@ -19,7 +17,7 @@ public class Car {
     private String title;
     @NotBlank
     private String description;
-    @JsonIgnore
+
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "category_id")
@@ -39,13 +37,6 @@ public class Car {
     @Lob
     @Column(name="thumbnail_uri", length=512)
     private String thumbnail_uri;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
 
     public Car() {}
 
@@ -126,13 +117,5 @@ public class Car {
 
     public void setThumbnailUri(String thumbnail_uri) {
         this.thumbnail_uri = thumbnail_uri;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class CategoryStoreDTO {
+public class CategoryUpdateDTO {
 
     @NotNull
     private String title;
@@ -15,11 +15,9 @@ public class CategoryStoreDTO {
     private String description;
 
 
-    public Category toCategory() {
-        Category category = new Category();
-        category.setTitle(title);
-        category.setDescription(description);
-        return category;
+    public Category toCategory(Category categoryToUpdate) {
+        categoryToUpdate.setTitle(title);
+        categoryToUpdate.setDescription(description);
+        return categoryToUpdate;
     }
-
 }
