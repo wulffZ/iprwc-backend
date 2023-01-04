@@ -12,6 +12,6 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Car c SET c.title = :title, c.description = :description, c.category = :category, c.manufacturer = :manufacturer, c.engine_displacement = :engine_displacement, c.cylinders = :cylinders, c.year = :year, c.km = :km, c.thumbnail_uri = :thumbnail_uri WHERE c.id = :id")
-    void update(String title, String description, Category category, String manufacturer, String engine_displacement, String cylinders, String year, String km, String thumbnail_uri,int id);
+    @Query(value = "UPDATE Car c SET c.title = :title, c.description = :description, c.category = :category, c.manufacturer = :manufacturer, c.engine_displacement = :engine_displacement, c.cylinders = :cylinders, c.year = :year, c.km = :km, c.price = :price, c.sold = :sold, c.thumbnail_uri = :thumbnail_uri WHERE c.id = :id")
+    void update(String title, String description, Category category, String manufacturer, String engine_displacement, String cylinders, String year, String km, String price, boolean sold, String thumbnail_uri,int id);
 }

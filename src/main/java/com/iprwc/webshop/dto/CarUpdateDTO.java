@@ -33,6 +33,12 @@ public class CarUpdateDTO {
     @NotNull
     private String km;
 
+    @NotNull
+    private String price;
+
+    @NotNull
+    private boolean sold;
+
     private String thumbnail_uri;
 
     public Car toCar(Car carToUpdate) {
@@ -44,6 +50,8 @@ public class CarUpdateDTO {
         carToUpdate.setCylinders(cylinders);
         carToUpdate.setYear(year);
         carToUpdate.setKm(km);
+        carToUpdate.setPrice(price);
+        carToUpdate.setSold(sold);
         carToUpdate.setThumbnailUri(thumbnail_uri);
 
         return carToUpdate;

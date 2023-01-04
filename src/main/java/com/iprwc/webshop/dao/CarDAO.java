@@ -40,7 +40,7 @@ public class CarDAO {
 
     public boolean update(Car car) {
         try {
-            carRepository.update(car.getTitle(), car.getDescription(), car.getCategory(), car.getManufacturer(), car.getEngine_displacement(), car.getCylinders(), car.getYear(), car.getKm(), car.getThumbnailUri(), car.getId());
+            carRepository.update(car.getTitle(), car.getDescription(), car.getCategory(), car.getManufacturer(), car.getEngine_displacement(), car.getCylinders(), car.getYear(), car.getKm(), car.getPrice(), car.isSold(), car.getThumbnailUri(), car.getId());
 
             return true;
         } catch (Exception e) {

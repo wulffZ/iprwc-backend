@@ -33,6 +33,12 @@ public class CarStoreDTO {
     @NotNull
     private String km;
 
+    @NotNull
+    private String price;
+
+    @NotNull
+    private boolean sold;
+
     private String thumbnail_uri;
 
     public Car toCar() {
@@ -45,6 +51,8 @@ public class CarStoreDTO {
         car.setCylinders(cylinders);
         car.setYear(year);
         car.setKm(km);
+        car.setPrice(price);
+        car.setSold(false);
         car.setThumbnailUri(thumbnail_uri);
 
         return car;

@@ -2,6 +2,7 @@ package com.iprwc.webshop.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -32,6 +33,9 @@ public class Car {
     private String year;
     @NotBlank
     private String km;
+    @NotBlank
+    String price;
+    boolean sold = false;
 
     @NotBlank
     @Lob
@@ -107,8 +111,24 @@ public class Car {
 
     public void setCategory(Category category) { this.category = category; }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     public void setDescription(String description) {
