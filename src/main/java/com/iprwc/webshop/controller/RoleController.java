@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import static java.util.Objects.isNull;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/user/role")
 public class RoleController {

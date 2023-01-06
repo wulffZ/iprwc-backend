@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import static java.util.Objects.isNull;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/category")
 public class CategoryController {

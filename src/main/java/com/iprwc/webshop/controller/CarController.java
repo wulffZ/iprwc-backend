@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import static java.util.Objects.isNull;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/car")
 public class CarController {

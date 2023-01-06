@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import static java.util.Objects.isNull;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
