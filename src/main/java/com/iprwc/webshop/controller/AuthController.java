@@ -43,7 +43,7 @@ public class AuthController {
         user.setPassword(EncryptionService.decrypt(user.getPassword()));
 
         List<Role> roles = new ArrayList<>();
-        int userRoleIndex = 2;
+        int userRoleIndex = 1;
         roles.add(this.roleService.getRoles().get(userRoleIndex));
         user.setRoles(roles);
 
